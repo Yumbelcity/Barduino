@@ -1,5 +1,5 @@
 node_modules/**/*
 .expo/*
 npm-debug.*
-application/utils/Firebase.js
-application/utils/Facebook.js
+application/utils/Firebase.js*
+application/utils/Facebook.js*
