@@ -9,7 +9,7 @@ import facebook from '../utils/Facebook'
 export default class LandingPage extends Component {
 
   static navigationOptions = {
-    title: 'Expo App'
+    title: 'Bistro Restobar'
   }
 
   login = () => {
@@ -34,7 +34,7 @@ export default class LandingPage extends Component {
 
     if (type === 'success') {
       const credentials = firebase.auth.FacebookAuthProvider.credential(token)
-      firebase.auth().signInWithCredential(credentials)
+      firebase.auth().signInAndRetrieveDataWithCredential(credentials)
         .catch(error => {
           Alert.alert(error.message)
         })

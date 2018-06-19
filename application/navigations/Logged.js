@@ -42,22 +42,22 @@ const restaurantsScreenStack = createStackNavigator(
     ListRestaurants: {
       screen: RestaurantsScreen,
       navigationOptions: ({ navigation }) => ({
-        title: 'Restaurantes',
+        title: 'Bistro RestoBar',
         headerLeft: leftIcon(navigation, 'bars')
       })
     },
-    AddRestaurant: {
+    AddTrago: {
       screen: AddRestaurantScreen,
       navigationOptions: ({ navigation }) => ({
-        title: 'Añadir Restaurante',
+        title: 'Añadir Trago',
         headerRight: rightIcon(navigation, 'home'),
         headerLeft: leftIcon(navigation, 'bars')
       })
     },
-    DetailRestaurant: {
+    DetalleTrago: {
       screen: DetailRestaurantScreen,
       navigationOptions: ({ navigation }) => ({
-        title: 'Detalle del Restaurante',
+        title: 'Detalle del Trago',
         headerRight: rightIcon(navigation, 'home'),
         headerLeft: leftIcon(navigation, 'bars')
       })
@@ -65,7 +65,7 @@ const restaurantsScreenStack = createStackNavigator(
     EditRestaurant: {
       screen: EditRestaurantScreen,
       navigationOptions: ({ navigation }) => ({
-        title: 'Editar Restaurante',
+        title: 'Editar Trago',
         headerRight: rightIcon(navigation, 'home')
       })
     }
@@ -92,7 +92,7 @@ export default createDrawerNavigator(
     RestaurantsScreen: {
       screen: restaurantsScreenStack,
       navigationOptions: ({ navigation }) => ({
-        drawerLabel: 'Restaurantes',
+        drawerLabel: 'Tragos',
         drawerIcon: ({ tintColor }) => (<Icon name='home' size={24} style={{ color: tintColor }} />)
       })
     },

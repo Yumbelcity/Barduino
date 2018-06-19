@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { StyleSheet, FlatList } from 'react-native'
 import BackgroundImage from '../../components/BackgroundImage'
 import PreLoader from '../../components/PreLoader'
-import RestaurantEmpty from '../../components/Restaurant/RestaurantEmpty'
-import RestaurantAddButton from '../../components/Restaurant/RestaurantAddButton'
+import SinTragos from '../../components/Restaurant/SinTragos'
+import TragoAddButton from '../../components/Restaurant/TragoAddButton'
 import { ListItem } from 'react-native-elements'
 import * as firebase from 'firebase'
 import { NavigationActions } from 'react-navigation'
@@ -12,58 +12,58 @@ export default class Restaurants extends Component {
   constructor() {
     super()
     this.state = {
-      restaurants: [],
+      tragos: [],
       loaded: false,
       restaurant_logo: require('../../../assets/images/avatar.png')
     }
 
-    this.refRestaurants = firebase.database().ref().child('restaurants')
+    this.refRestaurants = firebase.database().ref().child('trago')
   }
 
   componentDidMount() {
     this.refRestaurants.on('value', snapshot => {
-      let restaurants = []
+      let tragos = []
       snapshot.forEach(row => {
-        restaurants.push({
+        tragos.push({
           id: row.key,
-          name: row.val().name,
-          address: row.val().address,
-          capacity: row.val().capacity,
-          description: row.val().description
+          nombreTrago: row.val().nombreTrago,
+          precio: row.val().precio,
+          // capacity: row.val().capacity,
+          // description: row.val().description
         })
       })
 
       this.setState({
-        restaurants,
+        tragos,
         loaded: true
       })
     })
   }
 
-  addRestaurant = () => {
+  addTrago = () => {
     const navigateAction = NavigationActions.navigate({
-      routeName: 'AddRestaurant'
+      routeName: 'AddTrago'
     })
     this.props.navigation.dispatch(navigateAction)
   }
 
-  restaurantDetail = (restaurant) => {
+  restaurantDetail = (trago) => {
     const navigateAction = NavigationActions.navigate({
-      routeName: 'DetailRestaurant',
-      params: { restaurant }
+      routeName: 'DetalleTrago',
+      params: { trago }
     })
     this.props.navigation.dispatch(navigateAction)
   }
 
-  renderRestaurant(restaurant) {
+  renderRestaurant(trago) {
     return (
       <ListItem
         containerStyle={styles.item}
         titleStyle={styles.title}
         roundAvatar
-        title={`${restaurant.name} (Capacidad: ${restaurant.capacity})`}
+        title={`${trago.nombreTrago}`}
         leftAvatar={{ source: this.state.restaurant_logo }}
-        onPress={() => this.restaurantDetail(restaurant)}
+        onPress={() => this.restaurantDetail(trago)}
         rightIcon={{ name: 'arrow-right', type: 'font-awesome', style: styles.listIconStyle }}
       />
     )
@@ -71,27 +71,27 @@ export default class Restaurants extends Component {
 
 
   render() {
-    const { loaded, restaurants } = this.state
+    const { loaded, tragos } = this.state
     if (!loaded) {
       return <PreLoader />
     }
 
-    if (!restaurants.length) {
+    if (!tragos.length) {
       return (
         <BackgroundImage source={require('../../../assets/images/login_bg.jpg')}>
-          <RestaurantEmpty text='No hay Restaurantes Disponibles' />
-          <RestaurantAddButton addRestaurant={this.addRestaurant} />
+          <SinTragos text='No hay Tragos Disponibles' />
+          <TragoAddButton addTrago={this.addTrago} />
         </BackgroundImage>
       )
     }
     return (
       <BackgroundImage source={require('../../../assets/images/login_bg.jpg')}>
         <FlatList
-          data={restaurants}
+          data={tragos}
           renderItem={(data) => this.renderRestaurant(data.item)}
           keyExtractor={(data) => data.id}
         />
-        <RestaurantAddButton addRestaurant={this.addRestaurant} />
+        <TragoAddButton addTrago={this.addTrago} />
       </BackgroundImage>
     )
   }

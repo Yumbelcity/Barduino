@@ -2,16 +2,16 @@ import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native'
 import AppButton from '../AppButton'
 
-export default class RestaurantAddButton extends Component {
+export default class TragoAddButton extends Component {
 
   render() {
-    const { addRestaurant } = this.props
+    const { addTrago } = this.props
     return (
       <View style={styles.buttonContainer}>
         <AppButton
           bgColor='rgba(255, 38, 74, 0.9)'
-          title='Añadir un Restaurant'
-          action={addRestaurant}
+          title='Añadir un Trago'
+          action={addTrago}
           iconName='plus'
           iconSize={15}
           iconColor='#fff'

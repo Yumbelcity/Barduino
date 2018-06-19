@@ -1,8 +1,8 @@
 export default firebaseConfig = {
-  apiKey: "AIzaSyBVot0nDtxZX4Yqm49BHLckmk24BrnpvLQ",
-  authDomain: "expofirebase-41081.firebaseapp.com",
-  databaseURL: "https://expofirebase-41081.firebaseio.com",
-  projectId: "expofirebase-41081",
-  storageBucket: "expofirebase-41081.appspot.com",
-  messagingSenderId: "1018375549625"
+  apiKey: "AIzaSyDQj9EvpZEIgdgVRvrT_7t2HCyPTp18e8w",
+  authDomain: "barduino-cd009.firebaseapp.com",
+  databaseURL: "https://barduino-cd009.firebaseio.com",
+  projectId: "barduino-cd009",
+  storageBucket: "",
+  messagingSenderId: "180394499807"
 }
