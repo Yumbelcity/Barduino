@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { ScrollView } from 'react-native'
 import { NavigationActions } from 'react-navigation'
 import BackgroundImage from '../../components/BackgroundImage'
-import Restaurant from '../../components/Restaurant/Restaurant'
+import PersonalizarTrago from '../../components/Restaurant/PersonalizarTrago'
 
 export default class DetailRestaurant extends Component {
 
@@ -12,14 +12,6 @@ export default class DetailRestaurant extends Component {
     this.state = {
       trago: params.trago
     }
-  }
-
-  editRestaurant = () => {
-    const navigateAction = NavigationActions.navigate({
-      routeName: 'EditRestaurant',
-      params: { trago: this.state.trago }
-    })
-    this.props.navigation.dispatch(navigateAction)
   }
 
   goHome = () => {
@@ -36,9 +28,8 @@ export default class DetailRestaurant extends Component {
       <BackgroundImage source={require('../../../assets/images/login_bg.jpg')}>
         <ScrollView>
 
-          <Restaurant
+          <PersonalizarTrago
             goHome={this.goHome}
-            editRestaurant={this.editRestaurant}
             trago={trago}
           />
 

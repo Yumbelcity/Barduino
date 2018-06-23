@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import RestaurantsScreen from '../screens/Restaurants/Restaurants'
 import AddRestaurantScreen from '../screens/Restaurants/AddRestaurant'
 import LogoutScreen from '../screens/Logout'
-import DetailRestaurantScreen from '../screens/Restaurants/DetailRestaurant'
+import PersonalizarTragoScreen from '../screens/Restaurants/DetailRestaurant'
 import EditRestaurantScreen from '../screens/Restaurants/EditRestaurant'
 import ProfileScreen from '../screens/Profile'
 import { createDrawerNavigator, createStackNavigator } from 'react-navigation'
@@ -54,10 +54,10 @@ const restaurantsScreenStack = createStackNavigator(
         headerLeft: leftIcon(navigation, 'bars')
       })
     },
-    DetalleTrago: {
-      screen: DetailRestaurantScreen,
+    PersonalizarTrago: {
+      screen: PersonalizarTragoScreen,
       navigationOptions: ({ navigation }) => ({
-        title: 'Detalle del Trago',
+        title: 'Trago a tu medida',
         headerRight: rightIcon(navigation, 'home'),
         headerLeft: leftIcon(navigation, 'bars')
       })

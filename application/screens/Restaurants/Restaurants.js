@@ -4,9 +4,10 @@ import BackgroundImage from '../../components/BackgroundImage'
 import PreLoader from '../../components/PreLoader'
 import SinTragos from '../../components/Restaurant/SinTragos'
 import TragoAddButton from '../../components/Restaurant/TragoAddButton'
-import { ListItem } from 'react-native-elements'
+import { Card, ListItem } from 'react-native-elements'
 import * as firebase from 'firebase'
 import { NavigationActions } from 'react-navigation'
+import Trago from '../../components/Restaurant/Trago'
 
 export default class Restaurants extends Component {
   constructor() {
@@ -17,19 +18,21 @@ export default class Restaurants extends Component {
       restaurant_logo: require('../../../assets/images/avatar.png')
     }
 
-    this.refRestaurants = firebase.database().ref().child('trago')
+    this.refTragos = firebase.database().ref().child('trago')
   }
 
   componentDidMount() {
-    this.refRestaurants.on('value', snapshot => {
+    this.refTragos.on('value', snapshot => {
       let tragos = []
       snapshot.forEach(row => {
         tragos.push({
-          id: row.key,
+          _idTrago: row.key,
           nombreTrago: row.val().nombreTrago,
           precio: row.val().precio,
-          // capacity: row.val().capacity,
-          // description: row.val().description
+          imagePath: row.val().imagePath,
+          marca: row.val().marca,
+          grado: row.val().grado,
+          ml: row.val().ml
         })
       })
 
@@ -55,20 +58,32 @@ export default class Restaurants extends Component {
     this.props.navigation.dispatch(navigateAction)
   }
 
-  renderRestaurant(trago) {
+  personalizarTrago = (trago) => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: 'PersonalizarTrago',
+      params: { trago }
+    })
+    this.props.navigation.dispatch(navigateAction)
+  }
+
+  pedirBlanca = () => {
+
+  }
+
+  pedirNegra = () => {
+
+  }
+
+  renderTragos(trago) {
     return (
-      <ListItem
-        containerStyle={styles.item}
-        titleStyle={styles.title}
-        roundAvatar
-        title={`${trago.nombreTrago}`}
-        leftAvatar={{ source: this.state.restaurant_logo }}
-        onPress={() => this.restaurantDetail(trago)}
-        rightIcon={{ name: 'arrow-right', type: 'font-awesome', style: styles.listIconStyle }}
+      <Trago
+        pedirBlanca={this.pedirBlanca}
+        pedirNegra={this.pedirNegra}
+        personalizarTrago={() => this.personalizarTrago(trago)}
+        trago={trago}
       />
     )
   }
-
 
   render() {
     const { loaded, tragos } = this.state
@@ -88,10 +103,9 @@ export default class Restaurants extends Component {
       <BackgroundImage source={require('../../../assets/images/login_bg.jpg')}>
         <FlatList
           data={tragos}
-          renderItem={(data) => this.renderRestaurant(data.item)}
-          keyExtractor={(data) => data.id}
+          renderItem={(data) => this.renderTragos(data.item)}
+          keyExtractor={(data) => data._idTrago}
         />
-        <TragoAddButton addTrago={this.addTrago} />
       </BackgroundImage>
     )
   }
