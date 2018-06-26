@@ -87,6 +87,19 @@ export default class Restaurants extends Component {
 
   render() {
     const { loaded, tragos } = this.state
+
+    //
+
+    this.refPedidos = firebase.database().ref().child('pedido').orderByChild('estado').equalTo('pendiente').limitToFirst(1)
+    this.refPedidos.once('value', snapshot => {
+      snapshot.forEach(row => {
+        const estado = row.val().estado
+        console.log(String(estado))
+      })
+    })
+
+    //
+
     if (!loaded) {
       return <PreLoader />
     }
@@ -100,7 +113,7 @@ export default class Restaurants extends Component {
       )
     }
     return (
-      <BackgroundImage source={require('../../../assets/images/login_bg.jpg')}>
+      <BackgroundImage source={require('../../../assets/images/login_bg.jpg')} >
         <FlatList
           data={tragos}
           renderItem={(data) => this.renderTragos(data.item)}
