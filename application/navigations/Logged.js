@@ -5,6 +5,7 @@ import LogoutScreen from '../screens/Logout'
 import PersonalizarTragoScreen from '../screens/Restaurants/DetailRestaurant'
 import EditRestaurantScreen from '../screens/Restaurants/EditRestaurant'
 import ProfileScreen from '../screens/Profile'
+import PedidosScreen from '../screens/Restaurants/Pedidos'
 import { createDrawerNavigator, createStackNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -46,27 +47,12 @@ const restaurantsScreenStack = createStackNavigator(
         headerLeft: leftIcon(navigation, 'bars')
       })
     },
-    AddTrago: {
-      screen: AddRestaurantScreen,
-      navigationOptions: ({ navigation }) => ({
-        title: 'Añadir Trago',
-        headerRight: rightIcon(navigation, 'home'),
-        headerLeft: leftIcon(navigation, 'bars')
-      })
-    },
     PersonalizarTrago: {
       screen: PersonalizarTragoScreen,
       navigationOptions: ({ navigation }) => ({
         title: 'Trago a tu medida',
         headerRight: rightIcon(navigation, 'home'),
         headerLeft: leftIcon(navigation, 'bars')
-      })
-    },
-    EditRestaurant: {
-      screen: EditRestaurantScreen,
-      navigationOptions: ({ navigation }) => ({
-        title: 'Editar Trago',
-        headerRight: rightIcon(navigation, 'home')
       })
     }
   },
@@ -87,12 +73,26 @@ const profileScreenStack = createStackNavigator(
   navigationOptions
 )
 
+const misPedidosScreenStack = createStackNavigator(
+  {
+    PedidosScreen: {
+      screen: PedidosScreen,
+      navigationOptions: ({ navigation }) => ({
+        title: 'Mis pedidos',
+        headerLeft: leftIcon(navigation, 'bars'),
+        headerRight: rightIcon(navigation, 'home'),
+      })
+    }
+  },
+  navigationOptions
+)
+
 export default createDrawerNavigator(
   {
     RestaurantsScreen: {
       screen: restaurantsScreenStack,
       navigationOptions: ({ navigation }) => ({
-        drawerLabel: 'Tragos',
+        drawerLabel: 'Home',
         drawerIcon: ({ tintColor }) => (<Icon name='home' size={24} style={{ color: tintColor }} />)
       })
     },
@@ -101,6 +101,13 @@ export default createDrawerNavigator(
       navigationOptions: ({ navigation }) => ({
         drawerLabel: 'Perfil',
         drawerIcon: ({ tintColor }) => (<Icon name='user' size={24} style={{ color: tintColor }} />)
+      })
+    },
+    MisPedidosScreen: {
+      screen: misPedidosScreenStack,
+      navigationOptions: ({ navigation }) => ({
+        drawerLabel: 'Mis pedidos',
+        drawerIcon: ({ tintColor }) => (<Icon name='list-ul' size={24} style={{ color: tintColor }} />)
       })
     },
     LogoutScreen: {

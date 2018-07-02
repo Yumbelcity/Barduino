@@ -14,6 +14,7 @@ export default class PersonalizarTrago extends Component {
       total: trago.precio,
       pedido: {
         _idTrago: trago._idTrago,
+        _idUsuario: trago._idUsuario,
         ml: 60,
         bebida: '',
         estado: '',
@@ -43,6 +44,7 @@ export default class PersonalizarTrago extends Component {
     await this.setState({
       pedido: {
         _idTrago: this.state.pedido._idTrago,
+        _idUsuario: firebase.auth().currentUser.uid,
         ml: 200 * this.state.sliderValue / 100, //Falta multiplicar por porcentaje para calcular ml
         bebida: bebida,
         estado: 'pendiente',

@@ -3,7 +3,6 @@ import { View, Alert } from 'react-native'
 import BackgroundImage from '../components/BackgroundImage'
 import AppButton from '../components/AppButton'
 import { Card } from 'react-native-elements'
-//import Toast, {DURATION} from 'react-native-easy-toast'
 
 import t from 'tcomb-form-native'
 const Form = t.form.Form
@@ -66,7 +65,7 @@ export default class Register extends Component {
         this.validate.email, this.validate.password
       )
         .then(() => {
-          Alert.alert('Registro Correcto, Binvenido')
+          Alert.alert('Registro Correcto, Bienvenido')
         })
         .catch(err => {
           Alert.alert(err.message)
@@ -92,12 +91,13 @@ export default class Register extends Component {
               value={this.state.user}
             />
             <AppButton
-              bgColor='rgba(200, 200, 50, 0.9)'
+              bgColor='rgba(200, 38, 74, 1)'
               title='Registrarme'
               action={this.register}
               iconName='user-plus'
               iconSize={30}
               iconColor='#fff'
+              marginBottom={5}
             />
           </Card>
         </View>

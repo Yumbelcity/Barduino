@@ -1,26 +1,30 @@
 import React, { Component } from 'react'
-import { Alert, AsyncStorage, Text, View } from 'react-native'
+import { Alert, Text, View } from 'react-native'
 import * as firebase from 'firebase'
 import BackgroundImage from '../components/BackgroundImage'
 import AppButton from '../components/AppButton'
 import { Card, Input } from 'react-native-elements'
+import { NavigationActions } from 'react-navigation'
 
-export default class Profile extends Component {
+export default class CrearProfile extends Component {
 
   constructor() {
     super()
     this.state = {
       usuario: {
-        _idUsuario: '',
         nombre: '',
         apellido: '',
         activado: false,
-        estado: 'offline'
+        logueado: true
       }
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    await this.checkDatos()
+  }
+
+  checkDatos = () => {
     const key = firebase.auth().currentUser.uid
     let usuario = {}
     this.refUsuario = firebase.database().ref(`usuario/${key}`)
@@ -28,6 +32,12 @@ export default class Profile extends Component {
       .then(snapshot => {
         usuario = snapshot.val()
         this.setState({ usuario })
+        if (usuario.nombre !== '' && usuario.apellido !== '') {
+          const navigateAction = NavigationActions.navigate({
+            routeName: 'EsperarActivacion'
+          })
+          this.props.navigation.dispatch(navigateAction)
+        }
       })
       .catch(err => Alert.alert(err.message))
   }
@@ -57,6 +67,7 @@ export default class Profile extends Component {
     this.refUsuario.update(usuario)
       .then(() => Alert.alert('Perfil actualizado correctamente'))
       .catch(err => Alert.alert(err.message))
+    this.checkDatos()
   }
 
   render() {
@@ -77,11 +88,11 @@ export default class Profile extends Component {
             value={usuario.apellido}
             onChangeText={(val) => this.actualizarApellido(val)}
           />
+          <View style={{ marginTop: 30 }} />
           <AppButton
-            bgColor='rgba(203, 78, 72, 0.9)'
+            bgColor='rgba(200, 38, 74, 1)'
             title='Guardar'
             action={this.save}
-            iconName='save'
             iconSize={20}
             iconColor='#fff'
           />

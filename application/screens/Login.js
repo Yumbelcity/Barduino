@@ -6,8 +6,6 @@ import t from 'tcomb-form-native'
 import FormValidation from '../utils/Validation'
 import { Card } from 'react-native-elements'
 import * as firebase from 'firebase'
-// import Toast from 'react-native-simple-toast'
-import Toast, {DURATION} from 'react-native-easy-toast'
 
 const Form = t.form.Form
 
@@ -71,12 +69,13 @@ export default class Login extends Component {
               options={this.options}
             />
             <AppButton
-              bgColor='rgba(111, 38, 74, 0.7)'
-              title='Login'
+              bgColor='rgba(200, 38, 74, 1)'
+              title='Iniciar Sesión'
               action={this.login}
               iconName='sign-in'
               iconSize={20}
               iconColor='#fff'
+              right={true}
             />
           </Card>
         </View>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, FlatList } from 'react-native'
+import { Alert, StyleSheet, FlatList } from 'react-native'
 import BackgroundImage from '../../components/BackgroundImage'
 import PreLoader from '../../components/PreLoader'
 import SinTragos from '../../components/Restaurant/SinTragos'
@@ -15,7 +15,8 @@ export default class Restaurants extends Component {
     this.state = {
       tragos: [],
       loaded: false,
-      restaurant_logo: require('../../../assets/images/avatar.png')
+      restaurant_logo: require('../../../assets/images/avatar.png'),
+      pedido: {}
     }
 
     this.refTragos = firebase.database().ref().child('trago')
@@ -43,21 +44,6 @@ export default class Restaurants extends Component {
     })
   }
 
-  addTrago = () => {
-    const navigateAction = NavigationActions.navigate({
-      routeName: 'AddTrago'
-    })
-    this.props.navigation.dispatch(navigateAction)
-  }
-
-  restaurantDetail = (trago) => {
-    const navigateAction = NavigationActions.navigate({
-      routeName: 'DetalleTrago',
-      params: { trago }
-    })
-    this.props.navigation.dispatch(navigateAction)
-  }
-
   personalizarTrago = (trago) => {
     const navigateAction = NavigationActions.navigate({
       routeName: 'PersonalizarTrago',
@@ -66,19 +52,35 @@ export default class Restaurants extends Component {
     this.props.navigation.dispatch(navigateAction)
   }
 
-  pedirBlanca = () => {
+  pedirCon = async (bebida, precio, _idTrago, _idUsuario) => {
+    await this.setState({
+      pedido: {
+        _idTrago: _idTrago,
+        _idUsuario: _idUsuario,
+        ml: 200 * 60 / 100, //Falta multiplicar por porcentaje para calcular ml
+        bebida: bebida,
+        estado: 'pendiente',
+        total: precio
+      }
+    })
 
-  }
-
-  pedirNegra = () => {
-
+    let data = {}
+    const key = firebase.database().ref().child('pedido').push().key
+    data[key] = this.state.pedido
+    firebase.database().ref().child('pedido').update(data)
+      .then(() => {
+        Alert.alert('Pedido Realizado!')
+      })
+      .catch(err => {
+        Alert.alert(err.message)
+      })
   }
 
   renderTragos(trago) {
     return (
       <Trago
-        pedirBlanca={this.pedirBlanca}
-        pedirNegra={this.pedirNegra}
+        pedirBlanca={() => this.pedirCon('Sprite', trago.precio, trago._idTrago, firebase.auth().currentUser.uid)}
+        pedirNegra={() => this.pedirCon('Coca-Cola', trago.precio, trago._idTrago, firebase.auth().currentUser.uid)}
         personalizarTrago={() => this.personalizarTrago(trago)}
         trago={trago}
       />
@@ -87,18 +89,6 @@ export default class Restaurants extends Component {
 
   render() {
     const { loaded, tragos } = this.state
-
-    //
-
-    this.refPedidos = firebase.database().ref().child('pedido').orderByChild('estado').equalTo('pendiente').limitToFirst(1)
-    this.refPedidos.once('value', snapshot => {
-      snapshot.forEach(row => {
-        const estado = row.val().estado
-        console.log(String(estado))
-      })
-    })
-
-    //
 
     if (!loaded) {
       return <PreLoader />
