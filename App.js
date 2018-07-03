@@ -7,6 +7,7 @@ firebase.initializeApp(firebaseConfig)
 import GuestNavigation from './application/navigations/Guest'
 import LoggedNavigation from './application/navigations/Logged'
 import CrearProfileNavigation from './application/navigations/CrearProfile'
+console.disableYellowBox = true;
 
 export default class App extends Component {
   constructor() {

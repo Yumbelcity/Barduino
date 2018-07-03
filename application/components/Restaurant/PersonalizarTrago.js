@@ -72,10 +72,14 @@ export default class PersonalizarTrago extends Component {
 
     return (
       <Card
-        title={`${trago.marca} | ${trago.grado}º\n¿Qué tan cabezón?`}
+        title={`${trago.marca} | ${trago.grado}º\n¿Qué tan cargado lo quieres?`}
       >
-        <View style={{ width: '100%', height: 250 }}>
-          <Image source={require('../../../assets/images/cabeza.png')} resizeMode='contain' style={{ alignSelf: 'center', width: (this.state.sliderValue * 2), height: 250 }} />
+        <View style={{ width: '100%', height: 230 }}>
+          <Text style={{ textAlign: 'center', fontSize: 14, fontWeight: '100', marginTop: -20, }} >
+            *el precio variará según el % de alcohol
+          </Text>
+          <Image source={{ uri: (trago.marca === 'Pampero') ? "https://firebasestorage.googleapis.com/v0/b/barduino-cd009.appspot.com/o/tragos%2Fron%2Fpampero.jpg?alt=media&token=20f05423-a54a-4cea-9c76-f1b6ce9487a0" : "https://firebasestorage.googleapis.com/v0/b/barduino-cd009.appspot.com/o/tragos%2Fpisco%2Faltodelcarmen.jpg?alt=media&token=d4315249-b13a-4950-8d52-eeed9d4e0468" }} resizeMode='contain' style={{ alignSelf: 'center', width: 180, height: 230 }} />
+          {/* <Image source={require('../../../assets/images/cabeza.png')} resizeMode='contain' style={{ alignSelf: 'center', width: (this.state.sliderValue * 2), height: 250 }} /> */}
         </View>
         <Text style={{ textAlign: 'center', marginTop: 15, marginBottom: 10, fontSize: 30, fontWeight: 'bold' }} >
           {`TOTAL: $ ${this.state.total}`}

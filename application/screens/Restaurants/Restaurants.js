@@ -15,7 +15,6 @@ export default class Restaurants extends Component {
     this.state = {
       tragos: [],
       loaded: false,
-      restaurant_logo: require('../../../assets/images/avatar.png'),
       pedido: {}
     }
 

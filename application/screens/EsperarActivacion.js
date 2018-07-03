@@ -47,13 +47,12 @@ export default class EsperarActivacion extends Component {
 
     return (
       <BackgroundImage source={require('../../assets/images/login_bg.jpg')}>
-        <Card
-          title='Esperando Activación'
-          image={require('../../assets/images/login_bg.jpg')}
-          //featuredSubtitle={<ActivityIndicator size='large' />}
-          featuredSubtitle='HOLA'
-        >
-        </Card>
+        <View style={{ flex: 1, justifyContent: 'center', }}>
+          <Text style={{ fontSize: 30, fontWeight: 'bold', marginTop: 0, color: 'white', paddingLeft: 20, paddingRight: 20, textAlign: 'center' }}>Bienvenido a</Text>
+          <Text style={{ fontSize: 35, fontWeight: 'bold', marginTop: 0, color: 'white', paddingLeft: 20, paddingRight: 20, textAlign: 'center' }}>Bistro Restobar</Text>
+          <Text style={{ fontSize: 18, marginTop: 20, color: 'white', paddingLeft: 20, paddingRight: 20, textAlign: 'center' }}>Por favor acércate a la barra y pídele al encargado en caja que active tu cuenta para comenzar a pedir</Text>
+          <ActivityIndicator size='large' style={{ marginTop: 30, }} color='white' />
+        </View>
       </BackgroundImage>
     )
   }
