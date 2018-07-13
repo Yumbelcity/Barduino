@@ -48,11 +48,9 @@ export default class Pedidos extends Component {
       [
         {
           text: 'Eliminar', onPress: () => {
-            this.refPedidos.child(pedido._idPedido).remove()
-              .then(() => Alert.alert('OK'))
-              .catch(err => {
-                Alert.alert(err.message)
-              })
+            firebase.database().ref(`pedido/${pedido._idPedido}`).remove()
+              .then(() => Alert.alert('Pedido eliminado'))
+              .catch(err => Alert.alert(err.message))
           },
           style: 'destructive'
         },
