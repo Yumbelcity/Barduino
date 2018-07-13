@@ -5,7 +5,7 @@ export default class PreLoader extends Component {
   render() {
     return (
       <View style={styles.preloader} >
-        <ActivityIndicator color='red' size='large' />
+        <ActivityIndicator color='black' size='large' />
       </View>
     )
   }
@@ -16,6 +16,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#242935',
+    backgroundColor: 'white',
   }
 })

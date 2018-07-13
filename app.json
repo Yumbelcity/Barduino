@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "expo-firebase-app",
+    "name": "Barduino",
     "description": "This project is really great.",
-    "slug": "expo-firebase-app",
+    "slug": "barduino",
     "privacy": "public",
     "sdkVersion": "27.0.0",
     "platforms": ["ios", "android"],
-    "version": "1.0.0",
+    "version": "0.0.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/barduino_2x.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover",

@@ -1,3 +1,11 @@
 node_modules/**/*
+functions/node_modules/*
+functions/.eslintrc.json
+functions/firebase-debug.log
+functions/package-lock.json
+functions/yarn.lock
+.vscode/*
 .expo/*
 npm-debug.*
+application/utils/Firebase.js*
+application/utils/Facebook.js*

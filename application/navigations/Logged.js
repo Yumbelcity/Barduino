@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import RestaurantsScreen from '../screens/Restaurants/Restaurants'
 import AddRestaurantScreen from '../screens/Restaurants/AddRestaurant'
 import LogoutScreen from '../screens/Logout'
-import DetailRestaurantScreen from '../screens/Restaurants/DetailRestaurant'
+import PersonalizarTragoScreen from '../screens/Restaurants/DetailRestaurant'
 import EditRestaurantScreen from '../screens/Restaurants/EditRestaurant'
 import ProfileScreen from '../screens/Profile'
+import PedidosScreen from '../screens/Restaurants/Pedidos'
 import { createDrawerNavigator, createStackNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -42,31 +43,16 @@ const restaurantsScreenStack = createStackNavigator(
     ListRestaurants: {
       screen: RestaurantsScreen,
       navigationOptions: ({ navigation }) => ({
-        title: 'Restaurantes',
+        title: 'Bistro RestoBar',
         headerLeft: leftIcon(navigation, 'bars')
       })
     },
-    AddRestaurant: {
-      screen: AddRestaurantScreen,
+    PersonalizarTrago: {
+      screen: PersonalizarTragoScreen,
       navigationOptions: ({ navigation }) => ({
-        title: 'Añadir Restaurante',
+        title: 'Trago a tu medida',
         headerRight: rightIcon(navigation, 'home'),
         headerLeft: leftIcon(navigation, 'bars')
-      })
-    },
-    DetailRestaurant: {
-      screen: DetailRestaurantScreen,
-      navigationOptions: ({ navigation }) => ({
-        title: 'Detalle del Restaurante',
-        headerRight: rightIcon(navigation, 'home'),
-        headerLeft: leftIcon(navigation, 'bars')
-      })
-    },
-    EditRestaurant: {
-      screen: EditRestaurantScreen,
-      navigationOptions: ({ navigation }) => ({
-        title: 'Editar Restaurante',
-        headerRight: rightIcon(navigation, 'home')
       })
     }
   },
@@ -87,12 +73,26 @@ const profileScreenStack = createStackNavigator(
   navigationOptions
 )
 
+const misPedidosScreenStack = createStackNavigator(
+  {
+    PedidosScreen: {
+      screen: PedidosScreen,
+      navigationOptions: ({ navigation }) => ({
+        title: 'Mis pedidos',
+        headerLeft: leftIcon(navigation, 'bars'),
+        headerRight: rightIcon(navigation, 'home'),
+      })
+    }
+  },
+  navigationOptions
+)
+
 export default createDrawerNavigator(
   {
     RestaurantsScreen: {
       screen: restaurantsScreenStack,
       navigationOptions: ({ navigation }) => ({
-        drawerLabel: 'Restaurantes',
+        drawerLabel: 'Home',
         drawerIcon: ({ tintColor }) => (<Icon name='home' size={24} style={{ color: tintColor }} />)
       })
     },
@@ -101,6 +101,13 @@ export default createDrawerNavigator(
       navigationOptions: ({ navigation }) => ({
         drawerLabel: 'Perfil',
         drawerIcon: ({ tintColor }) => (<Icon name='user' size={24} style={{ color: tintColor }} />)
+      })
+    },
+    MisPedidosScreen: {
+      screen: misPedidosScreenStack,
+      navigationOptions: ({ navigation }) => ({
+        drawerLabel: 'Mis pedidos',
+        drawerIcon: ({ tintColor }) => (<Icon name='list-ul' size={24} style={{ color: tintColor }} />)
       })
     },
     LogoutScreen: {
